@@ -196,9 +196,8 @@ This project highlights the ability to work with real-world datasets and apply a
 
 ## 📎 Future Improvements
 
-* Build a Power BI / Tableau dashboard
+* Build a Power BI interactive dashboard
 * Perform predictive analysis
-* Add time-series analysis if date data is available
 
 ---
 
