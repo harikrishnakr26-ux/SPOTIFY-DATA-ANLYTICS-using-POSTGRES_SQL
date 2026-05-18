@@ -129,7 +129,6 @@ CREATE TABLE spotify (
 | `PERCENTILE_CONT … WITHIN GROUP` | Q7 |
 | `STDDEV()` composite scoring | Q8 |
 | `STRING_AGG … FILTER` | Q4 |
-| `NULLIF` for division safety | Q2, Q3, Q6, Q7 |
 | `HAVING` clause | Q8 |
 
 ---
@@ -166,8 +165,6 @@ FROM artist_streams, total
 ORDER BY contribution_pct DESC;
 ```
 
-**Why it's advanced:** Extends a basic percentage query with a cumulative running total using `SUM() OVER (ROWS BETWEEN …)` — this lets you directly read off "the top N artists account for X% of total streams," a Pareto chart in pure SQL.
-
 ---
 
 ### Q2 — Artist Market Share and Streaming Rank
@@ -201,8 +198,6 @@ WHERE stream_rank <= 20
 ORDER BY stream_rank;
 ```
 
-**Why it's advanced:** Combines CTE chaining with `RANK()` and a global `SUM() OVER ()` to calculate market share — a metric standard in BI dashboards. Demonstrates understanding of window function scope.
-
 ---
 
 ### Q3 — Track Engagement Funnel with Quartile Bucketing
@@ -230,8 +225,6 @@ WHERE views > 0
 ORDER BY like_rate_pct DESC
 LIMIT 50;
 ```
-
-**Why it's advanced:** Uses `NULLIF` for production-safe division, `NTILE(4)` for quartile bucketing, and a `CASE` flag — a pattern directly used in marketing funnel analysis.
 
 ---
 
@@ -265,8 +258,6 @@ FROM feature_scores
 GROUP BY mood_segment
 ORDER BY track_count DESC;
 ```
-
-**Why it's advanced:** Uses `STRING_AGG … FILTER` (PostgreSQL-specific) alongside rule-based segmentation that mimics ML cluster outputs — directly applicable to recommendation system pipelines.
 
 ---
 
@@ -306,8 +297,6 @@ FROM album_streams
 ORDER BY artist, album_streams DESC;
 ```
 
-**Why it's advanced:** Uses `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` framing — shows deep window function knowledge. `LAG(col, 1, 0)` with a default prevents NULL in the first-row delta.
-
 ---
 
 ### Q6 — Licensing Compliance Gap and Revenue Leakage
@@ -342,8 +331,6 @@ WHERE unlicensed_streams > 0
 ORDER BY unlicensed_streams DESC;
 ```
 
-**Why it's advanced:** Frames a technical query as a business risk problem — the kind of output a data analyst would present to legal or finance stakeholders, not just engineers.
-
 ---
 
 ### Q7 — Viral Track Detection using IQR Outlier Method
@@ -376,8 +363,6 @@ FROM ratios r, stats s
 WHERE r.view_stream_ratio > s.q3 + 1.5 * (s.q3 - s.q1)
 ORDER BY r.view_stream_ratio DESC;
 ```
-
-**Why it's advanced:** Applies the IQR outlier method entirely in SQL using `PERCENTILE_CONT … WITHIN GROUP` — a statistical technique most analysts implement in Python. Demonstrates SQL-first analytical thinking.
 
 ---
 
@@ -412,8 +397,6 @@ SELECT
 FROM diversity
 ORDER BY composite_diversity_score DESC;
 ```
-
-**Why it's advanced:** Constructs a composite scoring metric from `STDDEV` aggregations and buckets results with `NTILE(5)` — a pattern used in recommendation system feature engineering and A/B test segmentation.
 
 ---
 
@@ -451,7 +434,7 @@ The SQL analysis is extended into a 4-page interactive Power BI dashboard. Each 
 ---
 
 ### Page 3 — Artist Analysis
-
+![Image Alt](https://github.com/harikrishnakr26-ux/SPOTIFY-DATA-ANLYTICS-using-POSTGRES_SQL/blob/308e3494cf5e612fdbb04a84f9cf7592ccdec2d5/Screenshot%202026-05-18%20134551.png)
 
 
 **What it shows:**
@@ -464,7 +447,7 @@ The SQL analysis is extended into a 4-page interactive Power BI dashboard. Each 
 ---
 
 ### Page 4 — Trends & Insights
-
+![Image Alt](https://github.com/harikrishnakr26-ux/SPOTIFY-DATA-ANLYTICS-using-POSTGRES_SQL/blob/308e3494cf5e612fdbb04a84f9cf7592ccdec2d5/Screenshot%202026-05-18%20134601.png)
 
 
 **What it shows:**
@@ -502,10 +485,6 @@ The SQL analysis is extended into a 4-page interactive Power BI dashboard. Each 
 ---
 
 ## Future Improvements
-
-- Add a Python EDA notebook (pandas + seaborn) as a companion to the SQL analysis
-- Automate CSV → PostgreSQL ingestion with a Python script
-- Publish Power BI dashboard to Power BI Service for live web sharing
 - Extend with time-series analysis if release date data becomes available
 - Add DAX measures for month-over-month stream growth in Power BI
 
@@ -516,8 +495,6 @@ The SQL analysis is extended into a 4-page interactive Power BI dashboard. Each 
 ```
 spotify-data-analytics/
 │
-├── data/
-│   └── cleaned_dataset.csv
 │
 ├── sql/
 │   ├── schema.sql
