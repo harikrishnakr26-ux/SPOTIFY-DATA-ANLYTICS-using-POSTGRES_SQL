@@ -437,7 +437,7 @@ The SQL analysis is extended into a 4-page interactive Power BI dashboard. Each 
 ---
 
 ### Page 2 — Audio Analysis
-
+ ![Image Alt](https://github.com/harikrishnakr26-ux/SPOTIFY-DATA-ANLYTICS-using-POSTGRES_SQL/blob/04b31d6d5040e77f94b72a3e518c6ba6c288fb0e/Screenshot%202026-05-18%20134539.png)
 
 
 **What it shows:**
