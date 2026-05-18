@@ -424,7 +424,7 @@ The SQL analysis is extended into a 4-page interactive Power BI dashboard. Each 
 ---
 
 ### Page 1 — Spotify Streaming Summary
-
+![Image Alt](https://github.com/harikrishnakr26-ux/SPOTIFY-DATA-ANLYTICS-using-POSTGRES_SQL/blob/755f710c7d4baefa077aa9c19981226dbc0d5d53/Screenshot%202026-05-18%20134521.png)
 
 
 **What it shows:**
